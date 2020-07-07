@@ -1,9 +1,5 @@
 import jQuery from 'jquery';
 import * as XLSX from './libs/js-xlsx/xlsx.core.min.js';
-// import './libs/FileSaver/FileSaver.min.js';
-// import './libs/jsPDF/jspdf.min.js';
-// import './libs/jsPDF-AutoTable/jspdf.plugin.autotable.js';
-// import './libs/html2canvas/html2canvas.min.js';
 
 const TableExport = {
   export(selectedtable, options) {

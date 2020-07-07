@@ -28,6 +28,7 @@ function exportTableToExcel() {
     tableName: 'Table name',
   };
   var params = { fileName: 'report', type: 'excel', mso: { fileFormat: 'xlsx' } };
+  //var params = { fileName: 'report', type: 'pdf', jspdf: { orientation: 'p', margins: { left: 20, top: 10 }, autotable: false } };
 
   $.extend(true, options, params);
   TableExport.export($('.pvtTable').attr('border', '1'), options);
