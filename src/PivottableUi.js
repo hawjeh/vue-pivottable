@@ -8,7 +8,7 @@ import { PivotData, getSort, aggregators, sortAs } from './helper/utils';
 import draggable from 'vuedraggable';
 import TableRenderer from './TableRenderer';
 import PlotlyRenderer from './PlotlyRenderer';
-import JQuery from "jquery";
+import $ from 'jquery';
 
 export default {
   name: 'vue-pivottable-ui',
@@ -168,8 +168,8 @@ export default {
   },
   mounted() {
     var self = this;
-    JQuery(document).on("click", function(event) {
-      if(JQuery(".pvtAttr") !== event.target && !JQuery(".pvtAttr").has(event.target).length){
+    $(document).on('click', function(event) {
+      if ($('.pvtAttr') !== event.target && !$('.pvtAttr').has(event.target).length) {
         self.currentOpen = '';
       }
     });

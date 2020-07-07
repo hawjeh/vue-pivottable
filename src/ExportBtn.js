@@ -1,44 +1,34 @@
-import JQuery from 'jquery'
+import $ from 'jquery';
+import { TableExport } from './exportLib/tableExport.js';
 
 export default {
-  mounted () {
-    JQuery(document).unbind().on('click', '.exportbtn', function () {
-      exportTableToExcel()
-    })
+  mounted() {
+    $(document)
+      .unbind()
+      .on('click', '.exportbtn', function() {
+        exportTableToExcel();
+      });
   },
-  render (h) {
+  render(h) {
     return h(
       'button',
       {
         staticClass: ['exportbtn'],
         attrs: {
-          role: 'button'
-        }
-      }, 'Export to Excel'
-    )
-  }
-}
+          role: 'button',
+        },
+      },
+      'Export to Excel'
+    );
+  },
+};
 
-function exportTableToExcel (filename = '') {
-  var downloadLink
-  var dataType = 'application/vnd.ms-excel'
-  JQuery('table.pvtTable').attr('border', '1')
-  var tableSelect = document.getElementsByClassName('pvtTable')
-  var tableHTML = tableSelect[0].outerHTML.replace(/ /g, '%20')
+function exportTableToExcel() {
+  var options = {
+    tableName: 'Table name',
+  };
+  var params = { fileName: 'report', type: 'excel', mso: { fileFormat: 'xlsx' } };
 
-  filename = filename ? filename + '.xls' : 'excel_data.xls'
-  downloadLink = document.createElement('a')
-  document.body.appendChild(downloadLink)
-
-  if (navigator.msSaveOrOpenBlob) {
-    var blob = new Blob(['\ufeff', tableHTML], {
-      type: dataType
-    })
-
-    navigator.msSaveOrOpenBlob(blob, filename)
-  } else {
-    downloadLink.href = 'data:' + dataType + ', ' + tableHTML
-    downloadLink.download = filename
-    downloadLink.click()
-  }
+  $.extend(true, options, params);
+  TableExport.export($('.pvtTable').attr('border', '1'), options);
 }
